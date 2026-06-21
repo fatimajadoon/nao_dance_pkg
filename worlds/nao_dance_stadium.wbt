@@ -1,0 +1,64 @@
+#VRML_SIM R2025a utf8
+
+# nao_dance_stadium.wbt
+# Author: Fatima Jadoon
+# Date: April 2026
+#
+# Webots world file for the NAO dance routine project.
+# Uses the Robotstadium soccer field as the performance stage.
+# The NAO robot performs a 5-movement dance routine in the centre
+# of the stadium field.
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/robotstadium/protos/RobotstadiumSoccerField.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/softbank/nao/protos/Nao.proto"
+
+WorldInfo {
+  info [
+    "NAO Humanoid Robot Dance Routine"
+    "Author: Fatima Jadoon — University of Hertfordshire"
+    "5-movement choreographed routine in a stadium environment."
+    "Movements: Hand Wave, Tai Chi, Side Shuffle, Spin Turn, Finale."
+  ]
+  title "NAO Dance Routine — Stadium"
+  basicTimeStep 40
+  contactProperties [
+    ContactProperties {
+      material1 "NAO foot material"
+      coulombFriction [ 7 ]
+      bounce 0.3
+      bounceVelocity 0.003
+    }
+  ]
+}
+
+Viewpoint {
+  orientation -0.3 0.2 0.93 1.8
+  position 0 -4 3
+  follow "NAO"
+}
+
+TexturedBackground {
+  texture "stadium"
+}
+
+TexturedBackgroundLight {
+  texture "stadium"
+}
+
+# ---- Stadium performance stage ----
+RobotstadiumSoccerField {
+}
+
+# ---- NAO Robot — centre stage ----
+# Positioned at the centre circle of the stadium field.
+# Facing toward the main camera viewpoint for best visibility.
+DEF NAO Nao {
+  translation 0 0.334 0
+  rotation 0 1 0 0
+  name "NAO"
+  controller "nao_dance"
+  selfCollision FALSE
+  version "V5 (red)"
+}
